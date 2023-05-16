@@ -1,5 +1,80 @@
 # Microsoft Azure Introduction
 
+## Table of Contents
+
+- [Microsoft Azure Introduction](#microsoft-azure-introduction)
+  - [Table of Contents](#table-of-contents)
+  - [What is Azure?](#what-is-azure)
+  - [Cloud Concepts](#cloud-concepts)
+    - [Total Cost of Ownership (TCO)](#total-cost-of-ownership-tco)
+  - [Azure Technology Overview](#azure-technology-overview)
+    - [Azure Computing Services](#azure-computing-services)
+    - [Azure Storage Services](#azure-storage-services)
+    - [Azure Database Services](#azure-database-services)
+    - [Azure Application Integration Services](#azure-application-integration-services)
+    - [Developer and Mobile Tools](#developer-and-mobile-tools)
+    - [Azure DevOps Services](#azure-devops-services)
+    - [Azure Resource Manager](#azure-resource-manager)
+    - [Azure QuickStart Templates](#azure-quickstart-templates)
+    - [Azure Virtual Network (vNet) and Subnets](#azure-virtual-network-vnet-and-subnets)
+    - [Cloud-Native Networking Services](#cloud-native-networking-services)
+    - [Enterprise/Hybrid Networking Services](#enterprisehybrid-networking-services)
+    - [Azure Traffic Manager](#azure-traffic-manager)
+    - [Azure DNS](#azure-dns)
+    - [Azure Load Balancer](#azure-load-balancer)
+    - [Scale Sets](#scale-sets)
+    - [IoT Services](#iot-services)
+    - [Big Data and Analytics Services](#big-data-and-analytics-services)
+    - [AI ML Services Introduction](#ai-ml-services-introduction)
+    - [AI ML Services](#ai-ml-services)
+    - [Serverless Services](#serverless-services)
+  - [Management Tools](#management-tools)
+    - [Azure Portal](#azure-portal)
+    - [Azure PowerShell](#azure-powershell)
+    - [Visual Studio Code](#visual-studio-code)
+    - [Azure Cloud Shell](#azure-cloud-shell)
+    - [Azure CLI](#azure-cli)
+  - [Messing with Azure](#messing-with-azure)
+    - [Create a Resource Group](#create-a-resource-group)
+    - [Create a vNet](#create-a-vnet)
+    - [Launching a Server](#launching-a-server)
+    - [Creating a Azure Serverles Functions](#creating-a-azure-serverles-functions)
+    - [Storing files in Blob Storage](#storing-files-in-blob-storage)
+    - [Exploring Azure Cloud Shell](#exploring-azure-cloud-shell)
+  - [Security](#security)
+    - [Azure Trust Center](#azure-trust-center)
+    - [Compliance Programs](#compliance-programs)
+    - [Azure Active Directory](#azure-active-directory)
+    - [MFA](#mfa)
+    - [Azure Security Center](#azure-security-center)
+    - [Key Vault](#key-vault)
+    - [Azure DDoS Protection](#azure-ddos-protection)
+    - [Azure Firewall](#azure-firewall)
+    - [Azure Information Protection](#azure-information-protection)
+    - [Application Gateway](#application-gateway)
+    - [Advanced Threat Protection ATP](#advanced-threat-protection-atp)
+    - [Microsoft Security Development Lifecycle SDL](#microsoft-security-development-lifecycle-sdl)
+    - [Azure Policies](#azure-policies)
+    - [Role Based Access Control RBAC](#role-based-access-control-rbac)
+    - [Lock resources](#lock-resources)
+    - [Management Groups](#management-groups)
+    - [Azure Monitor](#azure-monitor)
+    - [Service Health](#service-health)
+    - [Azure Advisor](#azure-advisor)
+  - [Billing and Pricing](#billing-and-pricing)
+    - [Service Level Agreements](#service-level-agreements)
+    - [Service Credits](#service-credits)
+    - [Composite SLAs](#composite-slas)
+    - [TCO Calculator](#tco-calculator)
+    - [Azure Marketplace](#azure-marketplace)
+    - [Azure Support](#azure-support)
+    - [Azure Licensing](#azure-licensing)
+    - [Azure Subscriptions](#azure-subscriptions)
+    - [Pricing Calculator](#pricing-calculator)
+    - [Azure Cost Management](#azure-cost-management)
+
+
+## What is Azure?
 Microsoft calls their cloud service provider (**CSP**) Microsoft Azure Commonly referred to just **Azure**.
 
 ## Cloud Concepts
@@ -317,8 +392,8 @@ az vm create - -resource-group myResourceGroup --name myVM - - image UbuntuLTS -
 ## Messing with Azure
 
 ### Create a Resource Group
-1. Find and open *Resource Group* in the Azure Portal;
-2. Click on *Add*;
+1. Find and open **Resource Group** in the Azure Portal;
+2. Click on **Add**;
 3. Fill the form:
    * **Subscription**: Free Trial;
    * **Resource group**: `myResourceGroup`;
@@ -328,4 +403,215 @@ az vm create - -resource-group myResourceGroup --name myVM - - image UbuntuLTS -
 6. Wait for the deployment to complete and refresh after a while.
 
 
-### Create a 
+### Create a vNet
+1. Find and open **Virtual networks** in the Azure Portal;
+2. Click the **Add** button;
+3. Fill the form in the **Basics** tab:
+   * **Subscription**: Free Trial;
+   * **Resource group**: `myResourceGroup`;
+   * **Name**: `myVNet`;
+   * **Region**: West Europe;
+4. Take a look to the **IP Addresses** tab:
+   * **IPv4 address space**: the `/16` default range is fine;
+   * The deafult `/24` range for the **Subnet** will be fine;
+5. Adding stuff from the **Security** tab is not necessary for now and it will cost money (💸);
+6. **Review + create**;
+7. **Create**;
+8. Wait for the deployment to complete;
+9. **Go to resource**: a bunch of information about the subnet will be displayed and could be edited if necessary.
+
+
+### Launching a Server
+1. Find and open **Virtual machines** in the Azure Portal;
+2. Choose a **Resource group**;
+3. Call the VM **myVM**;
+4. Choose a **Region**;
+5. Pick **No infrastructure redundancy required** as availability options;
+6. Pick an **Ubuntu Server** image;
+7. Pick a **Standard B1s** size, since it is just an example and it does cost real money (💸);
+8. The **Authentication type** should be **SSH**, but it need some configuration, hence just pick **Password**;
+9. Set the **Username** and **Password**;
+10. No need to add **Inbound ports**;
+11. On the **Disks** tab, **Premium SSD** is ok and even the defaul **Encryption type** should be fine;
+12. Check the **Networking** tab and set:
+    * **Virtual network**: `myVNet`;
+    * **Subnet**: `default`;
+    * **Public IP**: `myVM-ip`;
+    * **NIC network security group**: `Basic`;
+13. **Management** tab should be fine;
+14. **Advanced** tab should be fine;
+15. **Review + create**;
+16. **Create**;
+
+Once the deployment is complete, you can click to **Go to resource** and see the VM details.
+Once we are sure the VM is running and the configuration is correct, since we successfully saw how to launch a VM, we can now delete it to avoid unnecessary costs (💸).
+To be sure it was deleted, we can also check the **Virtual machines** section in the Azure Portal.
+
+
+### Creating a Azure Serverles Functions
+1. Find and open **Function App** in the Azure Portal;
+2. **Add**;
+3. In the **Basics** tab:
+   * **Subscription**: Free Trial;
+   * **Resource group**: `myResourceGroup`;
+   * **Function App name**: `myFunctionApp`;
+   * **Publish**: Code;
+   * **Runtime stack**: Node.js;
+   * **Version**: 16;
+   * **Region**: West Europe;
+4. After a little bit of wandering among tabs: **Review + create**;
+5. After the deployment is complete, **Go to resource**;
+6. We can now create a function going to the **Functions** section on the left;
+7. We select **HTTP trigger** and call it **myFunction**;
+8. We can now write some code in the **index.js** file and perform some tests;
+9. Lastly, we can delete the function app.
+
+
+### Storing files in Blob Storage
+We said that Blob Storage is a serverless storage, hence we can store files without worrying about the underlying file-systems, resizing, etc.
+
+1. Find and open **Storage accounts** in the Azure Portal;
+2. **Add**;
+3. In the **Basics** tab:
+   * **Subscription**: Free Trial;
+   * **Resource group**: `myResourceGroup`;
+   * **Storage account name**: `myBlogStorage`;
+   * **Performance**: Standard;
+   * **Account kind**: BlobStorage;
+   * **Region**: West Europe;
+4. **Review + create**;
+5. **Create**;
+6. **Go to resource**;
+7. We can now create a **Container** to store our files going to the **Blob service** section on the left and then **Containers**;
+8. **+ Container**, we call it **myContainer** and set the **Public access level** to **Private**;
+9. Now we can click on that container and, once insede, we can upload some files and see them in the **Blobs** section;
+10. We can now delete the storage.
+
+
+### Exploring Azure Cloud Shell
+**Cloud Shell** is accessible from anywhere inside the Azure Portal, it is among the icons on the top right.
+It can be a **Bash** or a **PowerShell** shell. Once created the shell, e.g., a PowerShell we can type some commands:
+```PowerShell
+PS Azure:\> clear
+PS Azure:\> az account list
+```
+That's it, we can now turn off the shell.
+
+
+## Security
+
+### Azure Trust Center
+
+
+
+### Compliance Programs
+
+
+
+### Azure Active Directory
+
+
+
+### MFA
+
+
+
+### Azure Security Center
+
+
+
+### Key Vault
+
+
+
+### Azure DDoS Protection
+
+
+
+### Azure Firewall
+
+
+
+### Azure Information Protection
+
+
+
+### Application Gateway
+
+
+
+### Advanced Threat Protection ATP
+
+
+
+### Microsoft Security Development Lifecycle SDL
+
+
+
+### Azure Policies
+
+
+
+### Role Based Access Control RBAC
+
+
+
+### Lock resources
+
+
+
+### Management Groups
+
+
+
+### Azure Monitor
+
+
+
+### Service Health
+
+
+
+### Azure Advisor
+
+
+
+## Billing and Pricing
+
+### Service Level Agreements
+
+
+
+### Service Credits
+
+
+
+### Composite SLAs
+
+
+
+### TCO Calculator
+
+
+
+### Azure Marketplace
+
+
+
+### Azure Support
+
+
+
+### Azure Licensing
+
+
+
+### Azure Subscriptions
+
+
+
+### Pricing Calculator
+
+
+
+### Azure Cost Management
