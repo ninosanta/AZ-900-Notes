@@ -62,10 +62,10 @@
     - [Service Health](#service-health)
     - [Azure Advisor](#azure-advisor)
   - [Billing and Pricing](#billing-and-pricing)
-    - [Service Level Agreements](#service-level-agreements)
+    - [Service Level Agreements (SLAs)](#service-level-agreements-slas)
     - [Service Credits](#service-credits)
     - [Composite SLAs](#composite-slas)
-    - [TCO Calculator](#tco-calculator)
+    - [Total Cost of Ownership (TCO) Calculator](#total-cost-of-ownership-tco-calculator)
     - [Azure Marketplace](#azure-marketplace)
     - [Azure Support](#azure-support)
     - [Azure Licensing](#azure-licensing)
@@ -652,57 +652,162 @@ In the Azure Portal you can set the following lock levels:
 
 
 ### Management Groups
-
+It is a way of managing multiple subscriptions (accounts) into a hierarchal structure.
+* Each directory is given a single top-level management group called the "Root" management group.
+* All subscriptions within a management group automatically inherit the conditions applied to the management group.
 
 
 ### Azure Monitor
-
+Azure Monitor comprehensive solution for collecting, analyzing, and acting on telemetry from your cloud and on-premises environments.
+With AZ Monitor you can:
+* Create visual dashboards to visualize the health of your resources;
+* Create Smart Alerts;
+* Create Automated Actions;
+* Collect logs through Log Monitoring. 
 
 
 ### Service Health
+Information about current and upcoming issues such as:
+* Service impacting events;
+* Planned maintenance;
+* Other kind of changes that may affect your availability.
 
+In particular:
+1. Azure Status informs you of service outages in Azure;
+2. Azure service health a personalized view of the health of the Azure services and regions you're using;
+3. Azure resource health information about the health of your individual cloud resources, e.g., VMs.
 
 
 ### Azure Advisor
-
+Azure Advisor is a personalized **cloud consultant** that helps you follow best practices to optimize your Azure deployments. The Advisor dashboard displays personalized recommendations for all your subscriptions for the following 5 categories:
+1. **High Availability**: improve the reliability of your applications;
+2. **Security**: improve the security of your applications;
+3. **Performance**: improve the performance of your applications;
+4. **Cost**: optimize and reduce your overall Azure spend;
+5. **Operational Excellence**: improve the management of your Azure resources.
 
 
 ## Billing and Pricing
 
-### Service Level Agreements
+### Service Level Agreements (SLAs)
+Service Level Agreement (SLA) describes Azure's commitments for uptime and connectivity, e.g., 99.9999% uptime on one year base. Unfortunately, Azure SLAs are individualized per Azure Service, i.e., there is no an overall SLA for all the Azure Services.
 
+Uptime and connectivity is described as **Performance Targets**, and a Performance Target is represented as a percentage %.
+* 99% (two nines);
+* 99.9% (three nines);
+* 99.999% (five nines);
+* 99.9999999% (nine nines).
+
+The more the nines, the more expensive and reliable the service is. On this regard, Azure does not provide SLAs for the **Free Tier** or the shared tiers.
+
+SLAs can be checked [here](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services?lang=1).
 
 
 ### Service Credits
+Customers may have a discount applied to their Azure bill, as **compensation** for an under-performing Azure product or service based on the SLA.
 
+For example, the Azure Virtual Machine Service Credi calculation is:
+
+| Montly Uptime Percentage | Service Credit Percentage |
+| ------------------------ | ------------------------- |
+| < 99.9% | 10% |
+| < 99% | 25% |
+| < 95% | 100% |
 
 
 ### Composite SLAs
+We said that Azure SLAs are individualized per Azure Service. A Composite SLA is the resulting SLA when you combine different service offerings.
+
+For example, there is a Web App having a SLA of 99.95% and a SQL Database having a SLA of 99.99%. The Composite SLA is calculated as follows:
+```
+99.95% * 99.99% = 99.94%
+```
+Hence, the Composite SLA is 99.94%.
+To improve the Composite SLA, you can use for example a queue havig a SLA of 99.9% to save the transaction requests done to the Web App when the DB is down and then process them later, when the Web App is up and running again. This bring the Composite SLA to:
+```
+Web App * (DB or Queue) = 99.95% * (99.99% + 99.9%) = 99.95% * 99.99999% = ~99.95%
+```
+Hence, the Composite SLA in this case is ~99.95%.
 
 
+### Total Cost of Ownership (TCO) Calculator
+The TCO represents a way to estimate the cost savings you can realize by migrating your workloads to Azure. This is done through the TCP Calculator, which generates out a detailed report that can be exported as a PDF to send to decision makers. 
 
-### TCO Calculator
-
+* Resource: https://azure.microsoft.com/pricing/tco/calculator/
 
 
 ### Azure Marketplace
+Azure Marketplace are apps and services made available by third-party publishers to quickly get started. The available apps and services can be Free, Free-Trial, Pay-As-You-Go, Bring-Your-Own-License (BYOL).
 
+The Azure Marketplace can be accessed from the Azure Portal.
 
 
 ### Azure Support
+Azure has four Support Plans:
+* **Basic**: $0/month. 
+  * It is included in the Free Trial and gives email support only for billing and account management;
+  * Azure Advisor, Azure Health Status, Community Support, Azure Documentation.
+* **Developer**: 
+  * $29/month;
+  * Email technical support during business hours; 
+  * Third party software support;
+  * Minimal business impact (Sev C) < 8 hours;
+  * Azure Advisor, Azure Health Status, Community Support, Azure Documentation.
+* **Standard**: 
+  * $100/month;
+  * Email support during business hour;
+  * Phone technical support 24/7;
+  * Third party software support;
+  * Minimal business impact (Sev C) < 8 hours;
+  * Moderate (Sev B) < 4 hours;
+  * Critical business impact (Sev C) < 1 hour;
+  * Azure Advisor, Azure Health Status, Community Support, Azure Documentation;
+* **Professional Direct**: 
+  * $1000/month;
+  * Email support during business hour;
+  * Phone technical support 24/7;
+  * Third party software support;
+  * Minimal business impact (Sev C) < 4 hours;
+  * Moderate (Sev B) < 2 hours;
+  * Critical business impact (Sev C) < 1 hour;
+  * Azure Advisor, Azure Health Status, Community Support, Azure Documentation;
+  * Webinars and expertise support;
+* **Enterprise**:
+  * N/A data;
 
+* Resources: https://azure.microsoft.com/en-us/support/plans/
 
 
 ### Azure Licensing
+* **Azure Hybrid Benefit**: allows companies to use their on-premise Windows Server licenses with Software Assurance to run Windows Server virtual machines on Azure at a reduced cost.
 
+* Resources: https://azure.microsoft.com/en-gb/pricing/hybrid-benefit/#why-azure-hybrid-benefit
 
 
 ### Azure Subscriptions
-
+An Azure Subscription is the same as saying our Azure Account. There are four tiers of Azure Subscriptions:
+* **Free Subscription**:
+  * $0/month;
+  * 12 months of some free services;
+  * 200$ credit to spend in the first 30 days;
+* **Pay-As-You-Go Subscription**:
+  * Credit card required;
+  * Charged at the end of the month for what you used;
+* **Enterprise Agreement Subscription**:
+  * An Enterprise and Azure agree on receive discounted price for licenses and cloud services;
+* **Student Subscription**:
+  * No Credit Card Required;
+  * $100 USD credits for 12 months;
+  * Requires valid student email. 
 
 
 ### Pricing Calculator
+Configure and estimate the costs for Azure products. No Sign-in require. Download an Excel spreadsheet and share with your boss.
 
+* Resources: https://azure.microsoft.com/pricing/calculator
 
 
 ### Azure Cost Management
+This service permits to:
+* Perform **cost-analysis**, visualize the spending of your Azure cloud resources;
+* Create **budgets**, set a budget threshold be alerted when approaching or exceeded. 
