@@ -50,12 +50,12 @@
     - [Key Vault](#key-vault)
     - [Azure DDoS Protection](#azure-ddos-protection)
     - [Azure Firewall](#azure-firewall)
-    - [Azure Information Protection](#azure-information-protection)
+    - [Azure Information Protection (AIP)](#azure-information-protection-aip)
     - [Application Gateway](#application-gateway)
-    - [Advanced Threat Protection ATP](#advanced-threat-protection-atp)
-    - [Microsoft Security Development Lifecycle SDL](#microsoft-security-development-lifecycle-sdl)
-    - [Azure Policies](#azure-policies)
-    - [Role Based Access Control RBAC](#role-based-access-control-rbac)
+    - [Advanced Threat Protection (ATP)](#advanced-threat-protection-atp)
+    - [Microsoft Security Development Lifecycle (SDL)](#microsoft-security-development-lifecycle-sdl)
+    - [Azure Security Policies](#azure-security-policies)
+    - [Role Based Access Control (RBAC)](#role-based-access-control-rbac)
     - [Lock resources](#lock-resources)
     - [Management Groups](#management-groups)
     - [Azure Monitor](#azure-monitor)
@@ -501,63 +501,154 @@ That's it, we can now turn off the shell.
 ## Security
 
 ### Azure Trust Center
-
+It is a public-facing website portal providing easy access to **privacy** and **security** and **regulatory compliance** information.
+Whatever the organization need to know about Azure security, privacy, and compliance, it is all in here, no login required:
+ * https://www.microsoft.com/en-us/trust-center/product-overview
+ * e.g., [How GDPR is applied to Azure](https://learn.microsoft.com/en-us/compliance/regulatory/gdpr-dsr-Azure?view=o365-worldwide)
+ * Of course, the most important part is the [**Compliance**](https://azure.microsoft.com/en-us/explore/trusted-cloud/compliance/) section.
 
 
 ### Compliance Programs
+Enterprise Companies WILL NOT BUY your software solutions unless its secure.
+The compliances they looking for are:
+* NIST 800-53;
+* PIPEDA Compliant;
+* HIPPA Compliant;
+* FIPS-140-2 Compliant;
 
+Some of the compliance programs are:
+* **Criminal Justice Information Services (CJIS)**: any US state or local agency that wants to access the FBI's CJIS database is required to adhere to the CJIS Security Policy.
+* **Cloud Security Alliance (CSA) STAR Certification**: independent third-party assessment of a cloud provider's security posture.
+* **General Data Protection Regulation (GDPR)**: a European privacy law. Imposes new rules on companies, government agencies, non-profits, and other organizations that offer goods and services to people in the European Union (EU), or that collect and analyze data tied to EU residents.
+* **EU Model Clauses**: contractual guarantees around transfers of personal data outside of the EU.
+* **Health Insurance Portability and Accountability Act (HIPAA)**: US federal law that regulates patient Protected Health Information.
+* **International Organization for Standardization (ISO) and and the International Electrotechnical Commission (IC) 27018**: code of practice, covering the processing of personal information by cloud service providers.
+* **Multi-Tier Cloud Security (MTCS) Singapore**: Operational Singapore security management Standard. A common standard that cloud service providers (CSPs) can apply to address customer concerns about the security and confidentiality of data in the cloud, and the impact on businesses of using cloud services.
+* **Service Organization Controls (SOC) 1, 2, and 3**: independent third-party examination reports that demonstrate how the company achieves key compliance controls and objectives.
+* **National Institute of Standards and Technology (NIST) Cybersecurity Framework (CSF)**: Voluntary Framework that consists of standards, guidelines, and best practices to manage cybersecurity-related risks.
+* **UK Government G-Cloud**: cloud computing certification for services used by government entities in the United Kingdom.
+* **Federal Information Processing Standard (FIPS) 140-2**: US and Canadian government standard that specifies the security requirements for cryptographic modules that protect sensitive information.
 
 
 ### Azure Active Directory
+Azure Active Directory (Azure AD) is Microsoft's **cloud-based identity and access management service**, which helps your employees sign in and access resources.
+It will work with external resources, such as:
+* Microsoft Office 365;
+* Azure Portal;
+* SaaS Applications;
 
+As well as with internal resources, such as:
+* Applications within your intranet;
+* Access to workstations on-premise;
+
+Azure AD can implement **Single-Sign On** (**SSO**). With this property, a user logs in with a single ID and password to gain access to any of several related systems.
+
+Azure AD comes in four editions:
+* **Free**: MFA, SSO, Basic Security and Usage Reports, User Management;
+* **Office 365 Apps**: Company Branding, SLA, Two-Sync between On-Premise and Cloud;
+* **Premium 1**: Hybrid Architecture, Advanced Group Access, Conditional Access;
+* **Premium 2**: Identity Protection, Identity Governance.
 
 
 ### MFA
-
+Multi-Factor Authentication (**MFA**) is a security control where after you fill in your username/email and password **you have to use a second device**, such as a phone, to confirm that its you logging in.
+It protects against people who have stolen your password, and it is an option in most cloud providers. 
 
 
 ### Azure Security Center
-
+Azure Security Center is a unified infrastructure security management system. It strengthens the security posture of your data centers, and provides advanced threat protection across your hybrid workloads in the cloud. 
 
 
 ### Key Vault
-
+Azure Key Vault helps you safeguard cryptographic keys and other secrets used by cloud apps and services.
+It has many functionalities:
+* **Secrets Management**: securely store and control access to tokens, passwords, certificates, API keys, and other secrets;
+* **Key Management**: create and control encryption keys used to encrypt your data;
+* **Certificate Management**: provision, manage, and deploy your public and private SSL certificates for use with Azure and internal connected resources;
+* **Hardware Security Module**: secrets and keys can be protected either by software or FIPS 140-2 Level 2 validated HSMs.
+  * An HSM is a Hardware Security Module, i.e., a piece of hardware designed to store encryption keys securely in the memory (volatile) and not on the disk, such that if a HSM is shut down the keys are lost; 
+  * HSMs that are multi-tenant are FIPS 140-2 Compliant (multiple customers virtually isolated on an HSM).
+  * HSMs that are single-tenant are FIPS 140-3 Compliant (single customer on a dedicated HSM).
 
 
 ### Azure DDoS Protection
-
+Azure offers two tiers of DDoS Protection:
+* **DDoS Protection Basic**:
+  * Free;
+  * Already turned on protect Azure's global network;
+* **DDoS Protection Standard**:
+  * Starting at $2,994/month;
+  * Metrics, Alerts, Reporting;
+  * DDoS Expert Support;
+  * Application and Cost Protection SLAs.
 
 
 ### Azure Firewall
+Azure Firewall is a managed, cloud-based network security service that protects your Azure Virtual Network resources. Basically, it is a vNet that decides which traffic to allow and which to deny to the other vNets
+
+Its features are:
+* Centrally create, enforce, and log application and network connectivity policies across subscriptions and virtual networks;
+* Uses a static public IP address for your virtual network resources allowing outside firewalls to identify traffic originating from your virtual network;
+* High availability is built in, no additional load balancers are required;
+* Can configure during deployment to span multiple AZ for increased availability;
+* There's no additional cost for a firewall deployed in an Availability Zone (AZ);
+* There are additional costs for inbound and outbound data transfers associated with AZs.
 
 
-
-### Azure Information Protection
-
+### Azure Information Protection (AIP)
+AIP protects sensitive information such as emails and documents with encryption, restricts access and rights, and integrates security in **Office apps**. 
 
 
 ### Application Gateway
+Application Gateway is a **web-traffic load balancer** (Application Layer 7 HTTP) that re-route traffic based on a set of rules. A Web Application Firewall (WAF) can be attached for additional protection on OSI Layer 7.
 
 
+### Advanced Threat Protection (ATP)
+The difference between an Intrusion Detection System (IDS) and an Intrusion Protection System (IPS) is that the IDS will only detect an attack, while the IPS will detect and block it.
 
-### Advanced Threat Protection ATP
-
-
-
-### Microsoft Security Development Lifecycle SDL
+**Azure Advanced Threat Protection** (**ATP**) is a cloud-based security solution that leverages your on-premises Active Directory signals to identify, detect, and investigate advanced threats, compromised identities, and malicious insider actions directed at your organization.
 
 
+### Microsoft Security Development Lifecycle (SDL)
+Microsoft Security Development Lifecycle (SDL) is an industry-leading software security assurance process. It is a Microsoft-wide initiative and a mandatory policy since 2004, the SDL has played a critical role in embedding security and privacy in Microsoft software and culture.
 
-### Azure Policies
+Building security into each SDL phase of the development lifecycle helps you catch issues early, and it helps you reduce your development costs. 
 
 
+### Azure Security Policies
+Azure Policy is a service you can use to create, assign, and manage policies of resources. A policy allows you to enforce or control the properties of a resource.
 
-### Role Based Access Control RBAC
+Azure Policy evaluates resources in Azure by comparing the properties of those resources to business rules. These business rules, described in `JSON` format, are known as **Policy Definitions**.
 
+
+### Role Based Access Control (RBAC)
+It is a concept of how all the components of gaining access resources works.
+Azure role-based access control (Azure RBAC) helps you manage **who has access to Azure resources**, what they can do with those resources, and what areas they have access to.
+A Role Assignments is the way you control access to resources and consists of these three elements:
+  1. **Security Principal**: represents the identities requesting access to an Azure resource such as:
+      * **User**: an individual who has a profile in Azure Active Directory;
+      * **Group**: a set of users created in Azure Active Directory;
+      * **Service Principal**: a security identity used by applications or services to access specific Azure resources;
+      * **Managed identity**: an identity in Azure Active Directory that is automatically managed by Azure.
+  2. **Role Definition**: collection of **permissions**. A role definition lists the operations that can be performed, such as read, write, and delete. Roles can be high-level, like owner, or specific, like virtual machine reader.
+  Azure has built-in roles and you can define custom roles (not free).
+  These are the four fundamental built-in role:
+
+        |  | **Read** | **Grant** | **Create, Update, Delete** |
+        | --- | -------- | --------- | -------------------------- |
+        | **Owner** | X | X | X |
+        | **Contributor** | X | - | X |
+        | **Reader** | - | X | - |
+        | **User Access Administrator** | X | - | - |
+
+  1. **Scope**: is the set of resources that access for the Role Assignment applies to. Scope performs Access Controls at the *Management* (management of a bunch of accounts), *Subscription* (individual accounts) or *Resource Group* (group of resources) level.
 
 
 ### Lock resources
-
+As an *admin*, you may need to lock a subscription, resource group, or resource to prevent other users from accidentally deleting or modifying critical resources.
+In the Azure Portal you can set the following lock levels:
+* `CanNotDelete` (**Delete** in the Azure Portal): authorized users can still read and modify a resource, but they can't delete the resource;
+* `ReadOnly` (**Read-only** in the Azure Portal): authorized users can read a resource, but they can't delete or update the resource.
 
 
 ### Management Groups
